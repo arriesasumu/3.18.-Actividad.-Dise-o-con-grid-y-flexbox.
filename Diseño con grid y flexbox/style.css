@@ -1,0 +1,94 @@
+/* Elimina márgenes y rellenos por defecto y usa el modelo de caja border-box para todos los elementos */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Establece la fuente principal y el color de fondo del body */
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #c3c3c3;
+}
+
+/* Define márgenes, relleno y color de fondo para el contenedor principal */
+main{
+    margin: 20px;
+    padding: 10px;
+    background-color:  #f5f5f5;
+}
+
+/* Usa CSS Grid para organizar los artículos dentro de la sección.
+   - min-height: asegura que la sección ocupe al menos toda la altura de la ventana.
+   - grid-template: define las áreas y estructura de la cuadrícula.
+   - gap: espacio entre los elementos de la cuadrícula.
+*/
+section{
+    min-height: 100vh; /* Asegura que la sección tenga al menos la altura de la ventana */
+    display: grid;
+    grid-template: 
+    "c1 c1 c3 c4" 1fr
+    "c5 c6 c7 c8" 1fr /
+    1fr 1fr 1fr 1fr;
+    gap: 10px;
+    max-width: 1200px;    /* Limita el ancho máximo del grid */
+    margin: 0 auto;       /* Centra el grid en la pantalla */
+    padding: 10px;        /* Añade espacio a los lados */
+    box-sizing: border-box;
+}
+
+/* Cada artículo es un grid para organizar su contenido interno (imagen, título, párrafos) */
+article {
+    background-color: #fff;
+    display: grid;
+    grid-template: 
+    "f1" 1fr
+    "f2" auto
+    "f3" auto
+    "f4" auto / 
+    1fr;
+    gap: 10px;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* El primer artículo tiene un área especial en el grid principal y una estructura interna diferente */
+article:nth-child(1) {
+    background-color: #fff;
+    grid-area: c1;
+    grid-template: 
+    "f1" 1fr
+    "f2" auto
+    "f3" auto / 
+    1fr;
+}
+
+/* Añade relleno a los títulos y párrafos dentro de los artículos */
+h3, p {
+    padding: 10px;
+}
+
+/* Solución 1: Evita que las imágenes se deformen */
+article img {
+    width: 100%;
+    height: auto;      /* Cambia height: 100% por height: auto */
+    object-fit: cover; /* Opcional: recorta la imagen para que llene el espacio sin deformarse */
+    display: block;    /* Elimina espacios extra debajo de la imagen */
+    border-radius: 8px; /* Opcional: bordes redondeados para mejor estética */
+}
+
+/* Responsive: Grid de una sola columna en pantallas pequeñas */
+@media (max-width: 900px) {
+    section {
+        grid-template:
+            "c1" 1fr
+            "c3" 1fr
+            "c4" 1fr
+            "c5" 1fr
+            "c6" 1fr
+            "c7" 1fr
+            "c8" 1fr /
+            1fr;
+    }
+}
